@@ -130,8 +130,6 @@ if theme_choice == "라이트 모드":
         }
 
         div[data-baseweb="input"],
-        div[data-testid="stDateInput"],
-        div[data-testid="stDateInput"] > div,
         div[data-testid="stDateInput"] input,
         div[data-testid="stNumberInput"] input,
         input, textarea {
@@ -223,7 +221,7 @@ if theme_choice == "라이트 모드":
         }
     </style>
     """
-else:
+elif theme_choice == "다크 모드":
     theme_css = """
     <style>
         .stApp, [data-testid="stAppViewContainer"], [data-testid="stHeader"] {
@@ -295,12 +293,6 @@ else:
             color-scheme: dark !important;
         }
 
-        div[data-testid="stDateInput"],
-        div[data-testid="stDateInput"] > div {
-            border: 1px solid #41444C !important;
-            border-radius: 6px !important;
-        }
-
         div[data-testid="stNumberInput"] button {
             background-color: #31333F !important;
             color: #FAFAFA !important;
@@ -368,6 +360,57 @@ else:
         }
         .memo-text {
             color: #D0D0D0 !important;
+        }
+    </style>
+    """
+else:
+    theme_css = """
+    <style>
+        [data-testid="stSidebarCollapseButton"], 
+        [data-testid="stSidebarCollapsedControl"],
+        [data-testid="stSidebarControl"],
+        [data-testid="collapsedControl"] {
+            opacity: 1 !important;
+            visibility: visible !important;
+            display: flex !important;
+            z-index: 999999 !important;
+            position: fixed !important;
+            top: 0.8rem !important;
+            left: 0.8rem !important;
+        }
+        @media (prefers-color-scheme: light) {
+            .stApp, [data-testid="stAppViewContainer"], [data-testid="stHeader"] { background-color: #F8F9FA !important; color: #111827 !important; color-scheme: light !important; }
+            hr, [data-testid="stDivider"] { border-color: #D1D5DB !important; background-color: #D1D5DB !important; }
+            [data-testid="stSidebar"], [data-testid="stSidebar"] > div { background-color: #FFFFFF !important; border-right: 1px solid #E5E7EB !important; }
+            [data-testid="stSidebar"] * { color: #111827 !important; }
+            div[data-testid="stForm"] label, div[data-testid="stForm"] p, div[data-testid="stForm"] span { color: #111827 !important; }
+            [data-testid="stSidebarCollapseButton"] button, [data-testid="stSidebarCollapsedControl"] button, [data-testid="collapsedControl"] button { background-color: #E5E7EB !important; border: 1px solid #9CA3AF !important; }
+            [data-testid="stSidebarCollapseButton"] svg, [data-testid="stSidebarCollapsedControl"] svg, [data-testid="collapsedControl"] svg, [data-testid="stSidebarCollapseButton"] path, [data-testid="stSidebarCollapsedControl"] path, [data-testid="collapsedControl"] path { fill: #111827 !important; stroke: #111827 !important; color: #111827 !important; }
+            input, textarea, select, div[data-baseweb="input"], div[data-baseweb="input"] *, div[data-baseweb="textarea"], div[data-baseweb="select"] > div, div[data-testid="stDateInput"], div[data-testid="stDateInput"] *, div[data-testid="stDateInput"] input, div[data-testid="stNumberInput"] input { background-color: #FFFFFF !important; color: #111827 !important; -webkit-text-fill-color: #111827 !important; border: 1px solid #D1D5DB !important; color-scheme: light !important; }
+            div[data-testid="stNumberInput"] button { background-color: #F3F4F6 !important; color: #111827 !important; }
+            div[data-baseweb="select"] * { background-color: #FFFFFF !important; color: #111827 !important; }
+            div[data-testid="stExpander"], div[data-testid="stExpander"] summary { background-color: #FFFFFF !important; color: #111827 !important; border: 1px solid #D1D5DB !important; }
+            div[data-testid="stFileUploader"], div[data-testid="stFileUploader"] section { background-color: #FFFFFF !important; color: #111827 !important; }
+            .stButton > button, div[data-testid="stForm"] button { background-color: #F3F4F6 !important; color: #111827 !important; border: 1px solid #D1D5DB !important; }
+            .memo-box { background-color: #F3F4F6 !important; border-left: 4px solid #16A34A !important; }
+            .memo-title { color: #16A34A !important; }
+            .memo-text { color: #111827 !important; }
+        }
+        @media (prefers-color-scheme: dark) {
+            .stApp, [data-testid="stAppViewContainer"], [data-testid="stHeader"] { background-color: #0E1117 !important; color: #FAFAFA !important; color-scheme: dark !important; }
+            hr, [data-testid="stDivider"] { border-color: #41444C !important; background-color: #41444C !important; }
+            [data-testid="stSidebar"], [data-testid="stSidebar"] > div { background-color: #262730 !important; }
+            [data-testid="stSidebarCollapseButton"] button, [data-testid="stSidebarCollapsedControl"] button, [data-testid="collapsedControl"] button { background-color: #262730 !important; border: 1px solid #41444C !important; }
+            [data-testid="stSidebarCollapseButton"] svg, [data-testid="stSidebarCollapsedControl"] svg, [data-testid="collapsedControl"] svg, [data-testid="stSidebarCollapseButton"] path, [data-testid="stSidebarCollapsedControl"] path, [data-testid="collapsedControl"] path { fill: #FAFAFA !important; stroke: #FAFAFA !important; color: #FAFAFA !important; }
+            input, textarea, select, div[data-baseweb="input"], div[data-baseweb="input"] *, div[data-baseweb="textarea"], div[data-baseweb="select"] > div, div[data-testid="stDateInput"], div[data-testid="stDateInput"] *, div[data-testid="stDateInput"] input, div[data-testid="stNumberInput"] input { background-color: #262730 !important; color: #FAFAFA !important; -webkit-text-fill-color: #FAFAFA !important; border: 1px solid #41444C !important; color-scheme: dark !important; }
+            div[data-testid="stNumberInput"] button { background-color: #31333F !important; color: #FAFAFA !important; }
+            div[data-baseweb="select"] * { background-color: #262730 !important; color: #FAFAFA !important; }
+            div[data-testid="stExpander"], div[data-testid="stExpander"] summary { background-color: #262730 !important; color: #FAFAFA !important; border: 1px solid #41444C !important; }
+            div[data-testid="stFileUploader"], div[data-testid="stFileUploader"] section { background-color: #262730 !important; color: #FAFAFA !important; }
+            .stButton > button, div[data-testid="stForm"] button { background-color: #262730 !important; color: #FAFAFA !important; border: 1px solid #41444C !important; }
+            .memo-box { background-color: #262730 !important; border-left: 4px solid #4CAF50 !important; }
+            .memo-title { color: #4CAF50 !important; }
+            .memo-text { color: #D0D0D0 !important; }
         }
     </style>
     """
@@ -629,7 +672,7 @@ def load_data_from_file():
 if not st.session_state.lines and not st.session_state.vas_list:
     st.session_state.lines, st.session_state.vas_list = load_data_from_file()
 
-# 상단 대시보드 타이틀 및 테마 모드 선택 (시스템 설정 제거 및 라이트/다크만 남김)
+# 상단 대시보드 타이틀 및 테마 모드 선택
 col_head, col_theme = st.columns([3, 1])
 with col_head:
     st.title("📱 통신 회선 및 요금제 통합 관리 프로그램")
@@ -637,7 +680,7 @@ with col_head:
 with col_theme:
     st.selectbox(
         "🎨 테마 설정",
-        ["라이트 모드", "다크 모드"],
+        ["라이트 모드", "다크 모드", "시스템 설정"],
         key="theme_mode"
     )
 
