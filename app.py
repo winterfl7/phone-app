@@ -425,12 +425,16 @@ st.markdown(f"""
         line-height: 1.25 !important;
         margin-bottom: 0px !important;
     }}
+    
+    /* 📱 모바일 및 데스크탑 공통: 가로 배치 강제 고정 및 스크롤 래퍼 */
     [data-testid="stHorizontalBlock"] {{
         align-items: center;
         gap: 0.15rem !important;
         padding-top: 1px !important;
         padding-bottom: 1px !important;
+        flex-wrap: nowrap !important; /* 모바일에서 컬럼들이 밑으로 떨어지지 않고 가로로 유지되도록 설정 */
     }}
+    
     hr, [data-testid="stDivider"] {{
         margin-top: 0.35rem !important;
         margin-bottom: 0.35rem !important;
@@ -438,7 +442,19 @@ st.markdown(f"""
     .vas-section-container [data-testid="stHorizontalBlock"] {{
         margin-top: -0.3rem !important;
         margin-bottom: -0.3rem !important;
+        flex-wrap: nowrap !important;
     }}
+    
+    /* 📱 모바일 화면 표 밀림 및 깨짐 방지를 위한 가로 스크롤 컨테이너 적용 */
+    .table-scroll-container {{
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }}
+    .table-inner-wrapper {{
+        min-width: 1100px; /* 데스크탑 기준 최소 너비를 확보하여 찌그러짐 방지 */
+    }}
+
     @media (max-width: 768px) {{
         .block-container {{
             padding-left: 0.8rem !important;
@@ -887,7 +903,7 @@ if st.session_state.show_top_add_form:
 
 st.divider()
 
-# 회선 목록 출력
+# 회선 목록 출력 (모바일 가로 스크롤 대응 래퍼 적용)
 if not st.session_state.lines:
     st.info("👈 왼쪽 사이드바 또는 상단의 '➕ 새 회선 추가' 버튼을 눌러 회선 정보를 입력해 주세요.")
 else:
@@ -908,6 +924,8 @@ else:
         "수정",
         "삭제",
     ]
+
+    st.markdown('<div class="table-scroll-container"><div class="table-inner-wrapper">', unsafe_allow_html=True)
 
     header_cols = st.columns(col_widths)
     for col, header in zip(header_cols, headers):
@@ -1190,6 +1208,8 @@ else:
 
         st.divider()
 
+    st.markdown('</div></div>', unsafe_allow_html=True)
+
 # --- 📌 의무 부가서비스 일정 섹션 ---
 st.markdown("---")
 st.markdown("### 📌 의무 부가서비스 일정")
@@ -1200,7 +1220,7 @@ else:
     vas_col_widths = [1.5, 2.2, 2.2, 1.5, 0.45, 0.45]
     vas_headers = ["회선 / 번호", "부가서비스 내용", "의무사용 기간 및 D-day", "해지가능일", "수정", "삭제"]
 
-    st.markdown('<div class="vas-section-container">', unsafe_allow_html=True)
+    st.markdown('<div class="vas-section-container table-scroll-container"><div class="table-inner-wrapper" style="min-width: 900px;">', unsafe_allow_html=True)
     
     v_header_cols = st.columns(vas_col_widths)
     for col, header in zip(v_header_cols, vas_headers):
@@ -1274,7 +1294,7 @@ else:
 
         st.divider()
     
-    st.markdown('</div>', unsafe_allow_html=True)
+    st.markdown('</div></div>', unsafe_allow_html=True)
 
 if st.button("🚨 전체 목록 초기화"):
     st.session_state.lines = []
