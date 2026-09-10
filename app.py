@@ -279,8 +279,11 @@ elif theme_choice == "다크 모드":
         div[data-baseweb="input"],
         div[data-baseweb="input"] *,
         div[data-baseweb="base-input"],
+        div[data-baseweb="base-input"] *,
         div[data-baseweb="textarea"],
         div[data-baseweb="select"] > div,
+        div[data-testid="stDateInput"],
+        div[data-testid="stDateInput"] *,
         div[data-testid="stDateInput"] input,
         div[data-testid="stNumberInput"] input {
             background-color: #262730 !important;
@@ -383,7 +386,7 @@ else:
             div[data-testid="stForm"] label, div[data-testid="stForm"] p, div[data-testid="stForm"] span { color: #111827 !important; }
             [data-testid="stSidebarCollapseButton"] button, [data-testid="stSidebarCollapsedControl"] button, [data-testid="collapsedControl"] button { background-color: #E5E7EB !important; border: 1px solid #9CA3AF !important; }
             [data-testid="stSidebarCollapseButton"] svg, [data-testid="stSidebarCollapsedControl"] svg, [data-testid="collapsedControl"] svg, [data-testid="stSidebarCollapseButton"] path, [data-testid="stSidebarCollapsedControl"] path, [data-testid="collapsedControl"] path { fill: #111827 !important; stroke: #111827 !important; color: #111827 !important; }
-            input, textarea, select, div[data-baseweb="input"], div[data-baseweb="input"] *, div[data-baseweb="textarea"], div[data-baseweb="select"] > div, div[data-testid="stDateInput"], div[data-testid="stDateInput"] *, div[data-testid="stNumberInput"] input { background-color: #FFFFFF !important; color: #111827 !important; -webkit-text-fill-color: #111827 !important; border: 1px solid #D1D5DB !important; color-scheme: light !important; }
+            input, textarea, select, div[data-baseweb="input"], div[data-baseweb="input"] *, div[data-baseweb="textarea"], div[data-baseweb="select"] > div, div[data-testid="stDateInput"], div[data-testid="stDateInput"] *, div[data-testid="stDateInput"] input, div[data-testid="stNumberInput"] input { background-color: #FFFFFF !important; color: #111827 !important; -webkit-text-fill-color: #111827 !important; border: 1px solid #D1D5DB !important; color-scheme: light !important; }
             div[data-testid="stNumberInput"] button { background-color: #F3F4F6 !important; color: #111827 !important; }
             div[data-baseweb="select"] * { background-color: #FFFFFF !important; color: #111827 !important; }
             div[data-testid="stExpander"], div[data-testid="stExpander"] summary { background-color: #FFFFFF !important; color: #111827 !important; border: 1px solid #D1D5DB !important; }
@@ -399,7 +402,7 @@ else:
             [data-testid="stSidebar"], [data-testid="stSidebar"] > div { background-color: #262730 !important; }
             [data-testid="stSidebarCollapseButton"] button, [data-testid="stSidebarCollapsedControl"] button, [data-testid="collapsedControl"] button { background-color: #262730 !important; border: 1px solid #41444C !important; }
             [data-testid="stSidebarCollapseButton"] svg, [data-testid="stSidebarCollapsedControl"] svg, [data-testid="collapsedControl"] svg, [data-testid="stSidebarCollapseButton"] path, [data-testid="stSidebarCollapsedControl"] path, [data-testid="collapsedControl"] path { fill: #FAFAFA !important; stroke: #FAFAFA !important; color: #FAFAFA !important; }
-            input, textarea, select, div[data-baseweb="input"], div[data-baseweb="input"] *, div[data-baseweb="textarea"], div[data-baseweb="select"] > div, div[data-testid="stDateInput"], div[data-testid="stNumberInput"] input { background-color: #262730 !important; color: #FAFAFA !important; -webkit-text-fill-color: #FAFAFA !important; border: 1px solid #41444C !important; color-scheme: dark !important; }
+            input, textarea, select, div[data-baseweb="input"], div[data-baseweb="input"] *, div[data-baseweb="textarea"], div[data-baseweb="select"] > div, div[data-testid="stDateInput"], div[data-testid="stDateInput"] *, div[data-testid="stDateInput"] input, div[data-testid="stNumberInput"] input { background-color: #262730 !important; color: #FAFAFA !important; -webkit-text-fill-color: #FAFAFA !important; border: 1px solid #41444C !important; color-scheme: dark !important; }
             div[data-testid="stNumberInput"] button { background-color: #31333F !important; color: #FAFAFA !important; }
             div[data-baseweb="select"] * { background-color: #262730 !important; color: #FAFAFA !important; }
             div[data-testid="stExpander"], div[data-testid="stExpander"] summary { background-color: #262730 !important; color: #FAFAFA !important; border: 1px solid #41444C !important; }
@@ -432,7 +435,7 @@ st.markdown(f"""
         gap: 0.15rem !important;
         padding-top: 1px !important;
         padding-bottom: 1px !important;
-        flex-wrap: nowrap !important; /* 모바일에서 컬럼들이 밑으로 떨어지지 않고 가로로 유지되도록 설정 */
+        flex-wrap: nowrap !important;
     }}
     
     hr, [data-testid="stDivider"] {{
@@ -445,14 +448,13 @@ st.markdown(f"""
         flex-wrap: nowrap !important;
     }}
     
-    /* 📱 모바일 화면 표 밀림 및 깨짐 방지를 위한 가로 스크롤 컨테이너 적용 */
     .table-scroll-container {{
         width: 100%;
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
     }}
     .table-inner-wrapper {{
-        min-width: 1100px; /* 데스크탑 기준 최소 너비를 확보하여 찌그러짐 방지 */
+        min-width: 1100px;
     }}
 
     @media (max-width: 768px) {{
@@ -1112,7 +1114,6 @@ else:
             default_target_str = f"({item['carrier']},{item.get('owner_name', '회선')}회선) {item['phone_number']}"
             with st.expander(f"➕ [{item['phone_number']}] 의무 부가서비스 추가", expanded=True):
                 
-                # 본 회선에 이미 등록된 부가서비스가 있다면 목록을 보여주고 수정/삭제할 수 있는 영역 제공
                 line_vas_indices = [v_idx for v_idx, v in enumerate(st.session_state.vas_list) if item['phone_number'] in v.get('target_line', '')]
                 
                 if line_vas_indices:
@@ -1135,7 +1136,6 @@ else:
                                 save_data_to_file()
                                 st.rerun()
 
-                        # 개별 인라인 수정 폼
                         if st.session_state.editing_vas_idx == v_idx:
                             with st.form(key=f"inline_edit_vas_sub_form_{v_idx}"):
                                 st.markdown(f"**✏️ 부가서비스 정보 수정**")
@@ -1176,7 +1176,6 @@ else:
                                     st.rerun()
                     st.markdown("---")
 
-                # 부가서비스 등록 폼
                 with st.form(key=f"add_vas_form_{idx}", clear_on_submit=True):
                     v_col1, v_col2, v_col3, v_col4 = st.columns([1.5, 2.0, 1.0, 1.0])
                     with v_col1:
