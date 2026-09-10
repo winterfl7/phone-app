@@ -238,6 +238,17 @@ elif theme_choice == "다크 모드":
         [data-testid="stSidebar"], [data-testid="stSidebar"] > div {
             background-color: #262730 !important;
         }
+        
+        /* 🌙 다크모드 사이드바 글자 강제 하얀색 적용 */
+        [data-testid="stSidebar"] *, 
+        [data-testid="stSidebar"] label, 
+        [data-testid="stSidebar"] p, 
+        [data-testid="stSidebar"] span,
+        [data-testid="stSidebar"] h1, 
+        [data-testid="stSidebar"] h2, 
+        [data-testid="stSidebar"] h3 {
+            color: #FAFAFA !important;
+        }
 
         [data-testid="stSidebarCollapseButton"], 
         [data-testid="stSidebarCollapsedControl"],
@@ -400,6 +411,7 @@ else:
             .stApp, [data-testid="stAppViewContainer"], [data-testid="stHeader"] { background-color: #0E1117 !important; color: #FAFAFA !important; color-scheme: dark !important; }
             hr, [data-testid="stDivider"] { border-color: #41444C !important; background-color: #41444C !important; }
             [data-testid="stSidebar"], [data-testid="stSidebar"] > div { background-color: #262730 !important; }
+            [data-testid="stSidebar"] * { color: #FAFAFA !important; }
             [data-testid="stSidebarCollapseButton"] button, [data-testid="stSidebarCollapsedControl"] button, [data-testid="collapsedControl"] button { background-color: #262730 !important; border: 1px solid #41444C !important; }
             [data-testid="stSidebarCollapseButton"] svg, [data-testid="stSidebarCollapsedControl"] svg, [data-testid="collapsedControl"] svg, [data-testid="stSidebarCollapseButton"] path, [data-testid="stSidebarCollapsedControl"] path, [data-testid="collapsedControl"] path { fill: #FAFAFA !important; stroke: #FAFAFA !important; color: #FAFAFA !important; }
             input, textarea, select, div[data-baseweb="input"], div[data-baseweb="input"] *, div[data-baseweb="textarea"], div[data-baseweb="select"] > div, div[data-testid="stDateInput"], div[data-testid="stDateInput"] *, div[data-testid="stDateInput"] input, div[data-testid="stNumberInput"] input { background-color: #262730 !important; color: #FAFAFA !important; -webkit-text-fill-color: #FAFAFA !important; border: 1px solid #41444C !important; color-scheme: dark !important; }
